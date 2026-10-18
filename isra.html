@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Reservar Cita - Andy The Barbers</title>
+  <style>
+    body { font-family: Arial, sans-serif; margin: 30px; }
+    label { display: block; margin-top: 10px; }
+    select, input { padding: 5px; margin-top: 5px; }
+    button { margin-top: 15px; padding: 10px; }
+    .resultado { margin-top: 20px; font-weight: bold; color: darkgreen; }
+  </style>
+</head>
+<body>
+  <h2>Reserva tu cita</h2>
+
+  <label for="local">Selecciona el local:</label>
+  <select id="local" onchange="mostrarBarbero()">
+    <option value="">-- Selecciona --</option>
+    <option value="1">Local 1 - Río Cutuchi y Río Palora</option>
+    <option value="2">Local 2 - Pichincha y Manco Cápac</option>
+  </select>
+
+  <label for="barbero">Barbero asignado:</label>
+  <input type="text" id="barbero" readonly>
+
+  <label for="fecha">Fecha:</label>
+  <input type="date" id="fecha">
+
+  <label for="hora">Hora:</label>
+  <input type="time" id="hora">
+
+  <button onclick="reservar()">Reservar</button>
+
+  <div class="resultado" id="resultado"></div>
+
+  <script>
+    function mostrarBarbero() {
+      const local = document.getElementById("local").value;
+      const barberoInput = document.getElementById("barbero");
+
+      if (local === "1") {
+        barberoInput.value = "Andy";
+      } else if (local === "2") {
+        barberoInput.value = "Josué";
+      } else {
+        barberoInput.value = "";
+      }
+    }
+
+    function reservar() {
+      const local = document.getElementById("local").value;
+      const barbero = document.getElementById("barbero").value;
+      const fecha = document.getElementById("fecha").value;
+      const hora = document.getElementById("hora").value;
+
+      if (!local || !barbero || !fecha || !hora) {
+        alert("Por favor completa todos los campos.");
+        return;
+      }
+
+      const resultado = document.getElementById("resultado");
+      resultado.textContent = `Reserva confirmada: Local ${local}, Barbero ${barbero}, el ${fecha} a las ${hora}.`;
+    }
+  </script>
+</body>
+</html>
